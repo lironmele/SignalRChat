@@ -9,8 +9,10 @@ namespace ChatTest
     public partial class Main : UserControl
     {
         HubConnection hubConnection;
-        public Main()
+        readonly string user;
+        public Main(string user)
         {
+            this.user = user;
             InitializeComponent();
         }
 
@@ -46,13 +48,7 @@ namespace ChatTest
 
         private async void btnSendMessage_Click(object sender, EventArgs e)
         {
-            if (txtUser.ReadOnly == false)
-            {
-                if (txtUser.Text == "")
-                    txtUser.Text = "Anonymous";
-                txtUser.ReadOnly = true;
-            }
-            await hubConnection.InvokeAsync("SendMessage", txtUser.Text, txtMessage.Text);
+            await hubConnection.InvokeAsync("SendMessage", user, txtMessage.Text);
 
             txtMessage.Clear();
         }
