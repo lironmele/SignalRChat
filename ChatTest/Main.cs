@@ -28,6 +28,8 @@ namespace ChatTest
             {
                 richTxtChat.Text += $"<{user}> {message}\n";
             });
+
+            await hubConnection.InvokeAsync("RecieveHistory");
         }
 
         private async void Main_FormClosing(object sender, EventArgs e)
