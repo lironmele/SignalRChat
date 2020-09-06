@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ChatTest
 {
-    public partial class LoginControl : UserControl
+    public partial class LoginForm : Form
     {
-        public LoginControl()
+        public LoginForm()
         {
             InitializeComponent();
         }

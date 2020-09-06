@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 
 namespace ChatTest
 {
-    public partial class Main : Form
+    public partial class Main : UserControl
     {
         HubConnection hubConnection;
         public Main()
@@ -29,7 +29,7 @@ namespace ChatTest
             });
         }
 
-        private async void Main_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Main_FormClosing(object sender, EventArgs e)
         {
             await Disconnect();
         }

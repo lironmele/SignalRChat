@@ -1,6 +1,6 @@
 ﻿namespace ChatTest
 {
-    partial class LoginControl
+    partial class LoginForm
     {
         /// <summary> 
         /// Required designer variable.
