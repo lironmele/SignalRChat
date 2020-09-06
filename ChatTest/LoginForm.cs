@@ -22,7 +22,12 @@ namespace ChatTest
 
             hubConnection.InvokeAsync("AttemptLogin", txtLName.Text, txtLPassword.Text);
 
-            hubConnection.StopAsync();
+            hubConnection.On<string>("Login", (user) =>
+            {
+                hubConnection.Remove("Login");
+                hubConnection.StopAsync();
+                Login(user);
+            });
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -35,12 +40,19 @@ namespace ChatTest
 
             hubConnection.InvokeAsync("AttemptRegister", txtRName.Text, txtRPassword.Text);
 
-            hubConnection.StopAsync();
+            hubConnection.On<string>("Login", (user) =>
+            {
+                hubConnection.Remove("Login");
+                hubConnection.StopAsync();
+                Login(user);
+            });
         }
 
         private void Login(string user)
         {
-            // Open the main user control with the current user
+            Main main = new Main(user);
+            Controls.Add(main);
+            main.BringToFront();
         }
     }
 }
