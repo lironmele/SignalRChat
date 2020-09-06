@@ -18,7 +18,6 @@ namespace ChatTest
 
         private async void Main_Load(object sender, EventArgs e)
         {
-            string hi = ConfigurationManager.AppSettings["URL"];
             hubConnection = new HubConnectionBuilder()
                 .WithUrl(ConfigurationManager.AppSettings["URL"] + "/chatHub")
                 .Build();
