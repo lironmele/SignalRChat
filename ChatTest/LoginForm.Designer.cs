@@ -47,6 +47,7 @@
             this.btnLogin.TabIndex = 0;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // txtLPassword
             // 
@@ -113,11 +114,13 @@
             this.btnRegister.TabIndex = 6;
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
-            // LoginControl
+            // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 428);
             this.Controls.Add(this.lblRegister);
             this.Controls.Add(this.txtRName);
             this.Controls.Add(this.txtRPassword);
@@ -127,8 +130,7 @@
             this.Controls.Add(this.txtLName);
             this.Controls.Add(this.txtLPassword);
             this.Controls.Add(this.btnLogin);
-            this.Name = "LoginControl";
-            this.Size = new System.Drawing.Size(822, 484);
+            this.Name = "LoginForm";
             this.ResumeLayout(false);
             this.PerformLayout();
 
