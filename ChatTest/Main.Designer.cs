@@ -31,7 +31,6 @@
             this.btnSendMessage = new System.Windows.Forms.Button();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.richTxtChat = new System.Windows.Forms.RichTextBox();
-            this.txtUser = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnSendMessage
@@ -46,9 +45,9 @@
             // 
             // txtMessage
             // 
-            this.txtMessage.Location = new System.Drawing.Point(118, 382);
+            this.txtMessage.Location = new System.Drawing.Point(12, 382);
             this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Size = new System.Drawing.Size(423, 26);
+            this.txtMessage.Size = new System.Drawing.Size(529, 26);
             this.txtMessage.TabIndex = 1;
             // 
             // richTxtChat
@@ -62,26 +61,17 @@
             this.richTxtChat.TabStop = false;
             this.richTxtChat.Text = "";
             // 
-            // txtUser
-            // 
-            this.txtUser.Location = new System.Drawing.Point(12, 382);
-            this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(100, 26);
-            this.txtUser.TabIndex = 0;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 428);
-            this.Controls.Add(this.txtUser);
             this.Controls.Add(this.richTxtChat);
             this.Controls.Add(this.txtMessage);
             this.Controls.Add(this.btnSendMessage);
             this.Name = "Main";
-            this.Text = "Chat";
-            this.Disposed += new System.EventHandler(this.Main_FormClosing);
+            this.Size = new System.Drawing.Size(800, 428);
             this.Load += new System.EventHandler(this.Main_Load);
+            this.Disposed += new System.EventHandler(this.Main_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -92,7 +82,6 @@
         private System.Windows.Forms.Button btnSendMessage;
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.RichTextBox richTxtChat;
-        private System.Windows.Forms.TextBox txtUser;
     }
 }
 
