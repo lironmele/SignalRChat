@@ -7,45 +7,39 @@ namespace ChatTest
 {
     public partial class LoginForm : Form
     {
+        HubConnection hubConnection;
         public LoginForm()
         {
             InitializeComponent();
         }
-
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void LoginForm_Load(object sender, EventArgs e)
         {
-            HubConnection hubConnection = new HubConnectionBuilder()
+            hubConnection = new HubConnectionBuilder()
                 .WithUrl(ConfigurationManager.AppSettings["URL"] + "/chatHub")
                 .Build();
 
             hubConnection.StartAsync();
-
-            hubConnection.InvokeAsync("AttemptLogin", txtLName.Text, txtLPassword.Text);
-
-            hubConnection.On<string>("Login", (user) =>
+            hubConnection.On<string, bool>("Login", (user, success) =>
             {
-                hubConnection.Remove("Login");
-                hubConnection.StopAsync();
-                Login(user);
+                if (success)
+                {
+                    hubConnection.Remove("Login");
+                    hubConnection.StopAsync();
+                    Login(user);
+                }
+                else
+                    MessageBox.Show("Action Failed");
             });
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            hubConnection.InvokeAsync("AttemptLogin", txtLName.Text, txtLPassword.Text);
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            HubConnection hubConnection = new HubConnectionBuilder()
-                .WithUrl(ConfigurationManager.AppSettings["URL"] + "/chatHub")
-                .Build();
-
-            hubConnection.StartAsync();
-
             hubConnection.InvokeAsync("AttemptRegister", txtRName.Text, txtRPassword.Text);
-
-            hubConnection.On<string>("Login", (user) =>
-            {
-                hubConnection.Remove("Login");
-                hubConnection.StopAsync();
-                Login(user);
-            });
         }
 
         private void Login(string user)
@@ -54,5 +48,6 @@ namespace ChatTest
             Controls.Add(main);
             main.BringToFront();
         }
+
     }
 }
