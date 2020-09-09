@@ -5,4 +5,8 @@
     <UserSecretsId>a4590e29-ae9d-4744-85fa-49a91ad48034</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+  </ItemGroup>
+
 </Project>
