@@ -10,6 +10,6 @@ namespace SignalRChat.Models
         public int MessageID { get; set; }
         public string MessageContent { get; set; }
 
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }
