@@ -21,13 +21,9 @@ namespace SignalRChat.Hubs
         public async Task SendMessage(string user, string message)
         {
             User Sender = context.Users.Where(u => u.UserName == user).FirstOrDefault();
-            
-            Message _NewMessage = new Message() { User = Sender, MessageContent = message };
-            
-            context.Messages.Add(_NewMessage);
-            await context.SaveChangesAsync();
 
-            List<Message> debug = await context.Messages.ToListAsync();
+            context.Messages.Add(new Message() { User = Sender, MessageContent = message });
+            await context.SaveChangesAsync();
 
             await Clients.All.SendAsync("RecieveMessage", user, message);
         }
@@ -35,11 +31,7 @@ namespace SignalRChat.Hubs
         {
             foreach (Message message in context.Messages)
             {
-                try
-                {
-                    await Clients.Caller.SendAsync("RecieveMessage", message.User.UserName, message.MessageContent);
-                }
-                catch (System.Exception e) { }
+                await Clients.Caller.SendAsync("RecieveMessage", message.User.UserName, message.MessageContent);
             }
         }
         public async Task AttemptRegister(string Name, string Password)
