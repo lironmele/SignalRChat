@@ -63,5 +63,19 @@ namespace SignalRChat.Hubs
             else
                 await Clients.Caller.SendAsync("Login", Name, false);
         }
+        public async Task CreateChat(string chatName, List<string> users)
+        {
+            if (await context.Chats.AllAsync(c => c.ChatName != chatName))
+            {
+                Chat newChat = new Chat() { ChatName = chatName };
+                foreach (User user in context.Users.Where(u => users.Contains(u.UserName)).ToList())
+                {
+                    user.Chats.Add(newChat);
+                    newChat.Users.Add(user);
+                }
+                context.Chats.Add(newChat);
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }
