@@ -25,13 +25,13 @@ namespace SignalRChat.Hubs
             context.Messages.Add(new Message() { User = Sender, MessageContent = message });
             await context.SaveChangesAsync();
 
-            await Clients.All.SendAsync("RecieveMessage", user, message);
+            await Clients.All.SendAsync("RecieveMessage", Chat, user, message);
         }
         public async Task RecieveHistory(string Chat)
         {
             foreach (Message message in context.Chats.Where(c => c.ChatName == Chat).FirstOrDefault().Messages)
             {
-                await Clients.Caller.SendAsync("RecieveMessage", message.User.UserName, message.MessageContent);
+                await Clients.Caller.SendAsync("RecieveMessage", Chat, message.User.UserName, message.MessageContent);
             }
         }
         public async Task AttemptRegister(string Name, string Password)
