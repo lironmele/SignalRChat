@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,6 +12,7 @@ namespace ChatTest
         HubConnection hubConnection;
         readonly string user;
         public string currentChat;
+        List<ChatInfoControl> chatList;
         public Main(string user)
         {
             this.user = user;
@@ -26,10 +28,24 @@ namespace ChatTest
             await Connect();
 
             hubConnection.On<string, string, string>("RecieveMessage", (chat, user, message) =>
-            {
-                if (currentChat == chat)
-                    richTxtChat.Text += $"<{user}> {message}\n";
-            });
+                {
+                    if (currentChat == chat)
+                        richTxtChat.Text += $"<{user}> {message}\n";
+                });
+
+            hubConnection.On<string>("RecieveChat", (chatName) =>
+                {
+                    ChatInfoControl newChat = new ChatInfoControl(chatName);
+                    if (chatList.Count > 0)
+                    {
+                        newChat.Top = chatList[chatList.Count - 1].Bottom + 1;
+                    }
+                    else
+                    {
+                        newChat.Top = panelChats.Bottom + 1;
+                    }
+                    chatList.Add(newChat);
+                });
 
             await hubConnection.InvokeAsync("RecieveChatList", user);
         }
