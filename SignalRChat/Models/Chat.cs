@@ -15,5 +15,6 @@ namespace SignalRChat.Models
         public string ChatName { get; set; }
 
         public ICollection<User> Users { get; set; }
+        public ICollection<Message> Messages { get; set; }
     }
 }

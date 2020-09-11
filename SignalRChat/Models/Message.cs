@@ -11,5 +11,6 @@ namespace SignalRChat.Models
         public string MessageContent { get; set; }
 
         public virtual User User { get; set; }
+        public virtual Chat Chat { get; set; }
     }
 }
