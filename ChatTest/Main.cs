@@ -35,7 +35,7 @@ namespace ChatTest
 
             hubConnection.On<string>("RecieveChat", (chatName) =>
                 {
-                    ChatInfoControl newChat = new ChatInfoControl(chatName);
+                    ChatInfoControl newChat = new ChatInfoControl(chatName, this);
                     if (chatList.Count > 0)
                     {
                         newChat.Top = chatList[chatList.Count - 1].Bottom + 1;
@@ -71,7 +71,7 @@ namespace ChatTest
 
             txtMessage.Clear();
         }
-        private async void SelectChat(string chat)
+        public async void SelectChat(string chat)
         {
             richTxtChat.Clear();
             currentChat = chat;
