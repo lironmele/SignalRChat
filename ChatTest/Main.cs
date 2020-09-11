@@ -10,6 +10,7 @@ namespace ChatTest
     {
         HubConnection hubConnection;
         readonly string user;
+        public string currentChat;
         public Main(string user)
         {
             this.user = user;
@@ -24,12 +25,13 @@ namespace ChatTest
 
             await Connect();
 
-            hubConnection.On<string, string>("RecieveMessage", (user, message) =>
+            hubConnection.On<string, string, string>("RecieveMessage", (chat, user, message) =>
             {
-                richTxtChat.Text += $"<{user}> {message}\n";
+                if (currentChat == chat)
+                    richTxtChat.Text += $"<{user}> {message}\n";
             });
 
-            await hubConnection.InvokeAsync("RecieveHistory");
+            await hubConnection.InvokeAsync("RecieveChatList", user);
         }
 
         private async void Main_FormClosing(object sender, EventArgs e)
@@ -49,9 +51,15 @@ namespace ChatTest
 
         private async void btnSendMessage_Click(object sender, EventArgs e)
         {
-            await hubConnection.InvokeAsync("SendMessage", user, txtMessage.Text);
+            await hubConnection.InvokeAsync("SendMessage", currentChat, user, txtMessage.Text);
 
             txtMessage.Clear();
+        }
+        private async void SelectChat(string chat)
+        {
+            richTxtChat.Clear();
+            currentChat = chat;
+            await hubConnection.SendAsync("RecieveChatHistory", currentChat);
         }
     }
 }
