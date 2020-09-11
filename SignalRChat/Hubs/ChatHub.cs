@@ -25,7 +25,7 @@ namespace SignalRChat.Hubs
             context.Messages.Add(new Message() { User = Sender, MessageContent = message });
             await context.SaveChangesAsync();
 
-            await Clients.All.SendAsync("RecieveMessage", Chat, user, message);
+            await Clients.All.SendAsync("RecieveMessage", chat, user, message);
         }
         public async Task RecieveHistory(string Chat)
         {
