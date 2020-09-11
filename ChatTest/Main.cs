@@ -33,18 +33,21 @@ namespace ChatTest
                         richTxtChat.Text += $"<{user}> {message}\n";
                 });
 
-            hubConnection.On<string>("RecieveChat", (chatName) =>
+            hubConnection.On<string, List<string>>("RecieveChat", (chatName, chatUsers) =>
                 {
-                    ChatInfoControl newChat = new ChatInfoControl(chatName, this);
-                    if (chatList.Count > 0)
+                    if (chatUsers.Contains(user))
                     {
-                        newChat.Top = chatList[chatList.Count - 1].Bottom + 1;
+                        ChatInfoControl newChat = new ChatInfoControl(chatName, this);
+                        if (chatList.Count > 0)
+                        {
+                            newChat.Top = chatList[chatList.Count - 1].Bottom + 1;
+                        }
+                        else
+                        {
+                            newChat.Top = panelChats.Bottom + 1;
+                        }
+                        chatList.Add(newChat);
                     }
-                    else
-                    {
-                        newChat.Top = panelChats.Bottom + 1;
-                    }
-                    chatList.Add(newChat);
                 });
 
             await hubConnection.InvokeAsync("RecieveChatList", user);
@@ -71,6 +74,7 @@ namespace ChatTest
 
             txtMessage.Clear();
         }
+
         public async void SelectChat(string chat)
         {
             richTxtChat.Clear();
