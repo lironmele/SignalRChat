@@ -18,7 +18,7 @@ namespace SignalRChat.Hubs
         {
             return base.OnConnectedAsync();
         }
-        public async Task SendMessage(string user, string message)
+        public async Task SendMessage(string chat, string user, string message)
         {
             User Sender = context.Users.Where(u => u.UserName == user).FirstOrDefault();
 
