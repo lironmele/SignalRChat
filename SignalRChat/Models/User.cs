@@ -7,10 +7,16 @@ namespace SignalRChat.Models
 {
     public class User
     {
+        public User()
+        {
+            Messages = new HashSet<Message>();
+            Chats = new HashSet<Chat>();
+        }
         public int UserID { get; set; }
         public string UserName { get; set; }
         public string UserPassword { get; set; }
         
         public ICollection<Message> Messages { get; set; }
+        public ICollection<Chat> Chats { get; set; }
     }
 }
