@@ -105,7 +105,7 @@
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.RichTextBox richTxtChat;
         private System.Windows.Forms.Panel panelChats;
-        private System.Windows.Forms.Button btnCreateChat;
+        public System.Windows.Forms.Button btnCreateChat;
     }
 }
 

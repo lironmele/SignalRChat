@@ -15,21 +15,30 @@ namespace ChatTest
     {
         HubConnection hubConnection;
         List<CheckBox> users;
-        string currentUser;
-        public CreateChatControl(HubConnection hubConnection, string currentUser)
+        Main parent;
+        public CreateChatControl(HubConnection hubConnection, Main parent)
         {
             this.hubConnection = hubConnection;
-            this.currentUser = currentUser;
+            this.parent = parent;
             InitializeComponent();
+        }
+
+        private void CheckChange(object sender, EventArgs e)
+        {
+            if (users.All(u => u.Checked == false))
+                parent.btnCreateChat.Text = "Back To Chat List";
+            else
+                parent.btnCreateChat.Text = "Create Chat";
         }
 
         private void CreateChatControl_Load(object sender, EventArgs e)
         {
             hubConnection.On<string>("RecieveUsername", (name) =>
             {
-                if (name != currentUser)
+                if (name != parent.user)
                 {
-
+                    users.Add(new CheckBox());
+                    users.Last().CheckedChanged += CheckChange;
                 }
             });
         }
