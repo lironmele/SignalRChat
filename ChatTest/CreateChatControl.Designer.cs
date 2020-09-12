@@ -36,6 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "CreateChatControl";
             this.Size = new System.Drawing.Size(272, 355);
+            this.Load += new System.EventHandler(this.CreateChatControl_Load);
             this.ResumeLayout(false);
 
         }
