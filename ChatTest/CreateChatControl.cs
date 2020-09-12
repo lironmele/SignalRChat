@@ -14,7 +14,7 @@ namespace ChatTest
     public partial class CreateChatControl : UserControl
     {
         HubConnection hubConnection;
-        List<string> users;
+        List<CheckBox> users;
         string currentUser;
         public CreateChatControl(HubConnection hubConnection, string currentUser)
         {
@@ -28,7 +28,9 @@ namespace ChatTest
             hubConnection.On<string>("RecieveUsername", (name) =>
             {
                 if (name != currentUser)
-                    users.Add(name);
+                {
+
+                }
             });
         }
     }
