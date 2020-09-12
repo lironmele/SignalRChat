@@ -142,6 +142,12 @@
     <Compile Include="ChatInfoControl.Designer.cs">
       <DependentUpon>ChatInfoControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateChatControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CreateChatControl.Designer.cs">
+      <DependentUpon>CreateChatControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +164,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ChatInfoControl.resx">
       <DependentUpon>ChatInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateChatControl.resx">
+      <DependentUpon>CreateChatControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
