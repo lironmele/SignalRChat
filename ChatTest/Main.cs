@@ -10,7 +10,7 @@ namespace ChatTest
     public partial class Main : UserControl
     {
         HubConnection hubConnection;
-        readonly string user;
+        public readonly string user;
         public string currentChat;
         List<ChatInfoControl> chatList;
         public Main(string user)
