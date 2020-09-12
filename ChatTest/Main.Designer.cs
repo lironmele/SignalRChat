@@ -32,6 +32,7 @@
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.richTxtChat = new System.Windows.Forms.RichTextBox();
             this.panelChats = new System.Windows.Forms.Panel();
+            this.btnCreateChat = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSendMessage
@@ -67,13 +68,23 @@
             this.panelChats.AutoScroll = true;
             this.panelChats.Location = new System.Drawing.Point(4, 13);
             this.panelChats.Name = "panelChats";
-            this.panelChats.Size = new System.Drawing.Size(272, 395);
+            this.panelChats.Size = new System.Drawing.Size(272, 355);
             this.panelChats.TabIndex = 3;
+            // 
+            // btnCreateChat
+            // 
+            this.btnCreateChat.Location = new System.Drawing.Point(4, 374);
+            this.btnCreateChat.Name = "btnCreateChat";
+            this.btnCreateChat.Size = new System.Drawing.Size(272, 42);
+            this.btnCreateChat.TabIndex = 4;
+            this.btnCreateChat.Text = "Create Chat";
+            this.btnCreateChat.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnCreateChat);
             this.Controls.Add(this.panelChats);
             this.Controls.Add(this.richTxtChat);
             this.Controls.Add(this.txtMessage);
@@ -93,6 +104,7 @@
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.RichTextBox richTxtChat;
         private System.Windows.Forms.Panel panelChats;
+        private System.Windows.Forms.Button btnCreateChat;
     }
 }
 
