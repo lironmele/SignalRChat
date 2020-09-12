@@ -81,5 +81,21 @@ namespace ChatTest
             currentChat = chat;
             await hubConnection.SendAsync("RecieveChatHistory", currentChat);
         }
+
+        private void btnCreateChat_Click(object sender, EventArgs e)
+        {
+            if (panelChats.Visible)
+            {
+                panelChats.Visible = false;
+                //Get list of users
+                //Create control to create chat
+            }
+            else
+            {
+                panelChats.Visible = true;
+                //Create chat
+                //Close control
+            }
+        }
     }
 }

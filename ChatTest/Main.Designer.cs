@@ -79,6 +79,7 @@
             this.btnCreateChat.TabIndex = 4;
             this.btnCreateChat.Text = "Create Chat";
             this.btnCreateChat.UseVisualStyleBackColor = true;
+            this.btnCreateChat.Click += new System.EventHandler(this.btnCreateChat_Click);
             // 
             // Main
             // 
