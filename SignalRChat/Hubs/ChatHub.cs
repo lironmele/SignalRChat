@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 using Microsoft.AspNetCore.SignalR;
 using SignalRChat.Models;
 
@@ -50,6 +51,8 @@ namespace SignalRChat.Hubs
                 await context.SaveChangesAsync();
 
                 await Clients.Caller.SendAsync("Login", _NewUser.UserName, true);
+
+                await Clients.All.SendAsync("RecieveUsername", _NewUser.UserName);
             }
             else
             {
@@ -75,6 +78,13 @@ namespace SignalRChat.Hubs
                 }
                 context.Chats.Add(newChat);
                 await context.SaveChangesAsync();
+            }
+        }
+        public async Task RecieveUserList()
+        {
+            foreach (User User in context.Users)
+            {
+                await Clients.Caller.SendAsync("RecieveUsername", User.UserName);
             }
         }
     }
