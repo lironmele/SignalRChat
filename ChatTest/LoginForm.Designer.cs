@@ -41,7 +41,7 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(65, 318);
+            this.btnLogin.Location = new System.Drawing.Point(85, 311);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(219, 81);
             this.btnLogin.TabIndex = 2;
@@ -51,14 +51,14 @@
             // 
             // txtLPassword
             // 
-            this.txtLPassword.Location = new System.Drawing.Point(65, 218);
+            this.txtLPassword.Location = new System.Drawing.Point(85, 211);
             this.txtLPassword.Name = "txtLPassword";
             this.txtLPassword.Size = new System.Drawing.Size(219, 26);
             this.txtLPassword.TabIndex = 1;
             // 
             // txtLName
             // 
-            this.txtLName.Location = new System.Drawing.Point(65, 141);
+            this.txtLName.Location = new System.Drawing.Point(85, 134);
             this.txtLName.Name = "txtLName";
             this.txtLName.Size = new System.Drawing.Size(219, 26);
             this.txtLName.TabIndex = 0;
@@ -66,7 +66,7 @@
             // lblOr
             // 
             this.lblOr.AutoSize = true;
-            this.lblOr.Location = new System.Drawing.Point(374, 185);
+            this.lblOr.Location = new System.Drawing.Point(397, 178);
             this.lblOr.Name = "lblOr";
             this.lblOr.Size = new System.Drawing.Size(33, 20);
             this.lblOr.TabIndex = 4;
@@ -76,7 +76,7 @@
             // 
             this.lblLogin.AutoSize = true;
             this.lblLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLogin.Location = new System.Drawing.Point(54, 46);
+            this.lblLogin.Location = new System.Drawing.Point(74, 39);
             this.lblLogin.Name = "lblLogin";
             this.lblLogin.Size = new System.Drawing.Size(170, 64);
             this.lblLogin.TabIndex = 5;
@@ -86,7 +86,7 @@
             // 
             this.lblRegister.AutoSize = true;
             this.lblRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRegister.Location = new System.Drawing.Point(483, 48);
+            this.lblRegister.Location = new System.Drawing.Point(539, 39);
             this.lblRegister.Name = "lblRegister";
             this.lblRegister.Size = new System.Drawing.Size(245, 64);
             this.lblRegister.TabIndex = 9;
@@ -94,21 +94,21 @@
             // 
             // txtRName
             // 
-            this.txtRName.Location = new System.Drawing.Point(494, 141);
+            this.txtRName.Location = new System.Drawing.Point(550, 132);
             this.txtRName.Name = "txtRName";
             this.txtRName.Size = new System.Drawing.Size(219, 26);
             this.txtRName.TabIndex = 3;
             // 
             // txtRPassword
             // 
-            this.txtRPassword.Location = new System.Drawing.Point(494, 218);
+            this.txtRPassword.Location = new System.Drawing.Point(550, 209);
             this.txtRPassword.Name = "txtRPassword";
             this.txtRPassword.Size = new System.Drawing.Size(219, 26);
             this.txtRPassword.TabIndex = 4;
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(494, 318);
+            this.btnRegister.Location = new System.Drawing.Point(550, 309);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(219, 81);
             this.btnRegister.TabIndex = 5;
@@ -120,7 +120,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 428);
+            this.ClientSize = new System.Drawing.Size(853, 428);
             this.Controls.Add(this.lblRegister);
             this.Controls.Add(this.txtRName);
             this.Controls.Add(this.txtRPassword);
