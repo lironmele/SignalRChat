@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -13,6 +14,7 @@ namespace ChatTest
         public readonly string user;
         public string currentChat;
         List<ChatInfoControl> chatList;
+        CreateChatControl createChatControl;
         public Main(string user)
         {
             this.user = user;
@@ -88,14 +90,17 @@ namespace ChatTest
             {
                 panelChats.Visible = false;
                 btnCreateChat.Text = "Back To Chat List";
-                //Create control to create chat
+                createChatControl = new CreateChatControl(hubConnection, this);
             }
             else
             {
                 panelChats.Visible = true;
                 btnCreateChat.Text = "Create Chat";
-                //Create chat
-                //Close control
+                if (createChatControl.users.Any(u => u.Checked == true))
+                {
+                    //Create chat
+                }
+                createChatControl.Dispose();
             }
         }
     }
