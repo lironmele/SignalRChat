@@ -78,6 +78,9 @@ namespace SignalRChat.Hubs
                 }
                 context.Chats.Add(newChat);
                 await context.SaveChangesAsync();
+
+                List<string> userNames = newChat.Users.Select(u => u.UserName).ToList();
+                await Clients.All.SendAsync("RecieveChat", newChat.ChatName, userNames);
             }
         }
         public async Task RecieveUserList()
