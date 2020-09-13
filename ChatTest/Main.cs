@@ -98,7 +98,11 @@ namespace ChatTest
                 btnCreateChat.Text = "Create Chat";
                 if (createChatControl.users.Any(u => u.Checked == true))
                 {
-                    //Create chat
+                    List<string> users = new List<string>();
+                    foreach (CheckBox user in createChatControl.users.Where(u => u.Checked == true))
+                        users.Add(user.Text);
+
+                    hubConnection.InvokeAsync("CreateChat", createChatControl.chatName.Text);
                 }
                 createChatControl.Dispose();
             }
