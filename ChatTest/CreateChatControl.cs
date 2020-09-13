@@ -14,7 +14,7 @@ namespace ChatTest
     public partial class CreateChatControl : UserControl
     {
         HubConnection hubConnection;
-        List<CheckBox> users;
+        public List<CheckBox> users;
         Main parent;
         public CreateChatControl(HubConnection hubConnection, Main parent)
         {
@@ -39,6 +39,8 @@ namespace ChatTest
                 {
                     users.Add(new CheckBox());
                     users.Last().CheckedChanged += CheckChange;
+                    users.Last().Top = users[users.Count - 1].Bottom + 5;
+                    Controls.Add(users.Last());
                 }
             });
             hubConnection.InvokeAsync("RecieveUserList");
