@@ -88,7 +88,6 @@ namespace ChatTest
             {
                 panelChats.Visible = false;
                 btnCreateChat.Text = "Back To Chat List";
-                //Get list of users
                 //Create control to create chat
             }
             else

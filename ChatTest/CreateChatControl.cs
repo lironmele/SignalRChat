@@ -41,6 +41,7 @@ namespace ChatTest
                     users.Last().CheckedChanged += CheckChange;
                 }
             });
+            hubConnection.InvokeAsync("RecieveUserList");
         }
     }
 }
