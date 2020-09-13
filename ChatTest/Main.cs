@@ -91,6 +91,7 @@ namespace ChatTest
                 panelChats.Visible = false;
                 btnCreateChat.Text = "Back To Chat List";
                 createChatControl = new CreateChatControl(hubConnection, this);
+                createChatControl.BringToFront();
             }
             else
             {

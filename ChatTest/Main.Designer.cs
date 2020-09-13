@@ -91,7 +91,7 @@
             this.Controls.Add(this.txtMessage);
             this.Controls.Add(this.btnSendMessage);
             this.Name = "Main";
-            this.Size = new System.Drawing.Size(875, 428);
+            this.Size = new System.Drawing.Size(880, 428);
             this.Load += new System.EventHandler(this.Main_Load);
             this.Disposed += new System.EventHandler(this.Main_FormClosing);
             this.ResumeLayout(false);
