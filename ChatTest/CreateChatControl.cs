@@ -16,6 +16,7 @@ namespace ChatTest
         HubConnection hubConnection;
         public List<CheckBox> users;
         Main parent;
+        public TextBox chatName;
         public CreateChatControl(HubConnection hubConnection, Main parent)
         {
             this.hubConnection = hubConnection;
@@ -33,13 +34,16 @@ namespace ChatTest
 
         private void CreateChatControl_Load(object sender, EventArgs e)
         {
+            chatName = new TextBox { Text = "Type the chat's name here" };
+            Controls.Add(chatName);
+
             hubConnection.On<string>("RecieveUsername", (name) =>
             {
                 if (name != parent.user)
                 {
                     users.Add(new CheckBox());
                     users.Last().CheckedChanged += CheckChange;
-                    users.Last().Top = users[users.Count - 1].Bottom + 5;
+                    users.Last().Top = Controls[Controls.Count - 1].Bottom + 5;
                     Controls.Add(users.Last());
                 }
             });
