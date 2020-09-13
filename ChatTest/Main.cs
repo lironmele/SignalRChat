@@ -96,7 +96,7 @@ namespace ChatTest
             {
                 panelChats.Visible = true;
                 btnCreateChat.Text = "Create Chat";
-                if (createChatControl.users.Any(u => u.Checked == true))
+                if (createChatControl.users != null && createChatControl.users.Any(u => u.Checked == true))
                 {
                     List<string> users = new List<string>();
                     foreach (CheckBox user in createChatControl.users.Where(u => u.Checked == true))
