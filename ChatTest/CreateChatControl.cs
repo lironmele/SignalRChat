@@ -37,6 +37,7 @@ namespace ChatTest
                     users.Add(new CheckBox());
                     users.Last().CheckedChanged += CheckChange;
                     users.Last().Top = Controls[Controls.Count - 1].Bottom + 5;
+                    users.Last().Text = name;
                     Controls.Add(users.Last());
                 }
             });
