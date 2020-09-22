@@ -47,7 +47,7 @@ namespace ChatTest
                         }
                         else
                         {
-                            newChat.Top = panelChats.Bottom + 1;
+                            newChat.Top = panelChats.Top + 1;
                         }
                         chatList.Add(newChat);
                         Controls.Add(newChat);
