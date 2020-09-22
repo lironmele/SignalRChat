@@ -32,7 +32,7 @@ namespace SignalRChat.Hubs
         {
             foreach (Chat chat in context.Users.Where(u => u.UserName == user).FirstOrDefault().Chats)
             {
-                await Clients.Caller.SendAsync("RecieveChat", chat.ChatName);
+                await Clients.Caller.SendAsync("RecieveChat", chat.ChatName, chat.GetUsernames());
             }
         }
         public async Task RecieveChatHistory(string Chat)
