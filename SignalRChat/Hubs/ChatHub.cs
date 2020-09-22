@@ -12,6 +12,7 @@ namespace SignalRChat.Hubs
     public class ChatHub : Hub
     {
         ChatContext context;
+        const string MainChatName = "MainChat";
         public ChatHub() : base()
         {
             context = new ChatContext();
@@ -24,13 +25,22 @@ namespace SignalRChat.Hubs
         {
             User Sender = context.Users.Where(u => u.UserName == user).FirstOrDefault();
 
-            Chat chat = context.Chats.Where(c => c.ChatName == chatName).FirstOrDefault();
+            Chat chat;
+
+            try
+            {
+                chat = context.Chats.Where(c => c.ChatName == chatName).First();
+            }
+            catch (System.ArgumentNullException ex)
+            {
+                context.Chats.Add(CreateMainChat());
+            }
 
             Message newMessage = new Message() { User = Sender, MessageContent = message, Chat = chat };
 
             context.Messages.Add(newMessage);
             chat.Messages.Add(newMessage);
-            
+
             await context.SaveChangesAsync();
 
             await Clients.All.SendAsync("RecieveMessage", chat, user, message);
@@ -56,6 +66,14 @@ namespace SignalRChat.Hubs
             if (!context.Users.Where(u => u.UserName == Name).Any())
             {
                 User _NewUser = new User() { UserName = Name, UserPassword = Password };
+                try
+                {
+                    _NewUser.Chats = context.Chats.Where(c => c.ChatName == MainChatName).ToList();
+                }
+                catch (System.ArgumentNullException ex)
+                {
+                    _NewUser.Chats = (ICollection<Chat>) CreateMainChat();
+                }    
                 context.Users.Add(_NewUser);
                 await context.SaveChangesAsync();
 
@@ -98,6 +116,14 @@ namespace SignalRChat.Hubs
             {
                 await Clients.Caller.SendAsync("RecieveUsername", User.UserName);
             }
+        }
+        private Chat CreateMainChat()
+        {
+            Chat mainChat = new Chat() { ChatName = MainChatName, Users = context.Users.ToList() };
+            context.Chats.Add(mainChat);
+            context.Users.ForEachAsync(u => u.Chats.Add(mainChat));
+            context.SaveChanges();
+            return mainChat;
         }
     }
 }
