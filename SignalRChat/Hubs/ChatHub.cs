@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
@@ -19,11 +20,17 @@ namespace SignalRChat.Hubs
         {
             return base.OnConnectedAsync();
         }
-        public async Task SendMessage(string chat, string user, string message)
+        public async Task SendMessage(string chatName, string user, string message)
         {
             User Sender = context.Users.Where(u => u.UserName == user).FirstOrDefault();
 
-            context.Messages.Add(new Message() { User = Sender, MessageContent = message });
+            Chat chat = context.Chats.Where(c => c.ChatName == chatName).FirstOrDefault();
+
+            Message newMessage = new Message() { User = Sender, MessageContent = message, Chat = chat };
+
+            context.Messages.Add(newMessage);
+            chat.Messages.Add(newMessage);
+            
             await context.SaveChangesAsync();
 
             await Clients.All.SendAsync("RecieveMessage", chat, user, message);
