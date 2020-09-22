@@ -9,12 +9,12 @@ namespace ChatTest
         private Main Parent { get; set; }
         public ChatInfoControl(string chatName, Main Parent)
         {
+            InitializeComponent();
+
             this.chatName = chatName;
             btnOpenChat.Text = chatName;
 
             this.Parent = Parent;
-
-            InitializeComponent();
         }
 
         private void btnOpenChat_Click(object sender, EventArgs e)
