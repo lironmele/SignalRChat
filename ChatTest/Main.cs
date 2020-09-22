@@ -49,6 +49,7 @@ namespace ChatTest
                             newChat.Top = panelChats.Bottom + 1;
                         }
                         chatList.Add(newChat);
+                        Controls.Add(newChat);
                     }
                 });
 
@@ -105,7 +106,7 @@ namespace ChatTest
                     foreach (CheckBox user in createChatControl.users.Where(u => u.Checked == true))
                         users.Add(user.Text);
 
-                    hubConnection.InvokeAsync("CreateChat", createChatControl.txtChatName.Text);
+                    hubConnection.InvokeAsync("CreateChat", createChatControl.txtChatName.Text, users);
                 }
                 Controls.Remove(createChatControl);
                 createChatControl.Dispose();
