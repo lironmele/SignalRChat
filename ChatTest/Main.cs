@@ -18,6 +18,7 @@ namespace ChatTest
         public Main(string user)
         {
             this.user = user;
+            currentChat = "MainChat";
             InitializeComponent();
             chatList = new List<ChatInfoControl>();
         }
