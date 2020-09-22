@@ -37,6 +37,8 @@ namespace SignalRChat.Hubs
         }
         public async Task RecieveChatHistory(string Chat)
         {
+            if (context.Chats.Where(c => c.ChatName == Chat).FirstOrDefault() == null)
+                return;
             foreach (Message message in context.Chats.Where(c => c.ChatName == Chat).FirstOrDefault().Messages)
             {
                 await Clients.Caller.SendAsync("RecieveMessage", Chat, message.User.UserName, message.MessageContent);
