@@ -19,6 +19,7 @@ namespace ChatTest
         {
             this.user = user;
             InitializeComponent();
+            chatList = new List<ChatInfoControl>();
         }
 
         private async void Main_Load(object sender, EventArgs e)
