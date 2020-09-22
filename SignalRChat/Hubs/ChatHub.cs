@@ -33,7 +33,8 @@ namespace SignalRChat.Hubs
             }
             catch (System.ArgumentNullException ex)
             {
-                context.Chats.Add(CreateMainChat());
+                chat = CreateMainChat();
+                context.Chats.Add(chat);
             }
 
             Message newMessage = new Message() { User = Sender, MessageContent = message, Chat = chat };
