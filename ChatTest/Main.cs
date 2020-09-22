@@ -49,6 +49,7 @@ namespace ChatTest
                         {
                             newChat.Top = panelChats.Top + 1;
                         }
+                        newChat.Left = Left + 5;
                         chatList.Add(newChat);
                         Controls.Add(newChat);
                     }
