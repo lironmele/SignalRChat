@@ -37,7 +37,7 @@ namespace SignalRChat.Hubs
         }
         public async Task RecieveChatHistory(string Chat)
         {
-            if (context.Chats.Where(c => c.ChatName == Chat).FirstOrDefault() == null)
+            if (context.Chats.Where(c => c.ChatName == Chat).FirstOrDefault().Messages == null)
                 return;
             foreach (Message message in context.Chats.Where(c => c.ChatName == Chat).FirstOrDefault().Messages)
             {
