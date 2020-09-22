@@ -11,6 +11,13 @@ namespace SignalRChat.Models
         {
             Users = new HashSet<User>();
         }
+        public List<string> GetUsernames()
+        {
+            List<string> usernames = new List<string>();
+            foreach (User user in Users)
+                usernames.Add(user.UserName);
+            return usernames;
+        }
         public int ChatID { get; set; }
         public string ChatName { get; set; }
 
