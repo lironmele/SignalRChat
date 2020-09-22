@@ -91,6 +91,7 @@ namespace ChatTest
                 panelChats.Visible = false;
                 btnCreateChat.Text = "Back To Chat List";
                 createChatControl = new CreateChatControl(hubConnection, this);
+                Controls.Add(createChatControl);
                 createChatControl.BringToFront();
             }
             else
@@ -103,8 +104,9 @@ namespace ChatTest
                     foreach (CheckBox user in createChatControl.users.Where(u => u.Checked == true))
                         users.Add(user.Text);
 
-                    hubConnection.InvokeAsync("CreateChat", createChatControl.chatName.Text);
+                    hubConnection.InvokeAsync("CreateChat", createChatControl.txtChatName.Text);
                 }
+                Controls.Remove(createChatControl);
                 createChatControl.Dispose();
             }
         }

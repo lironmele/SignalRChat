@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
 
@@ -21,6 +16,7 @@ namespace ChatTest
         {
             this.hubConnection = hubConnection;
             this.parent = parent;
+            users = new List<CheckBox>();
             InitializeComponent();
         }
 
@@ -34,9 +30,6 @@ namespace ChatTest
 
         private void CreateChatControl_Load(object sender, EventArgs e)
         {
-            chatName = new TextBox { Text = "Type the chat's name here" };
-            Controls.Add(chatName);
-
             hubConnection.On<string>("RecieveUsername", (name) =>
             {
                 if (name != parent.user)
