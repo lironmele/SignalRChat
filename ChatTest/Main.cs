@@ -101,6 +101,7 @@ namespace ChatTest
                 if (createChatControl.users != null && createChatControl.users.Any(u => u.Checked == true))
                 {
                     List<string> users = new List<string>();
+                    users.Add(user);
                     foreach (CheckBox user in createChatControl.users.Where(u => u.Checked == true))
                         users.Add(user.Text);
 
