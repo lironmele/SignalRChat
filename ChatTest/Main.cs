@@ -25,6 +25,8 @@ namespace ChatTest
 
         private async void Main_Load(object sender, EventArgs e)
         {
+            RecieveChat(currentChat, new List<string>() { user });
+            
             hubConnection = new HubConnectionBuilder()
                 .WithUrl(ConfigurationManager.AppSettings["URL"] + "/chatHub")
                 .Build();
@@ -42,7 +44,6 @@ namespace ChatTest
                     RecieveChat(chatName, chatUsers);
                 });
 
-            RecieveChat(currentChat, new List<string>() { user });
             await hubConnection.SendAsync("RecieveChatHistory", currentChat);
             await hubConnection.InvokeAsync("RecieveChatList", user);
         }
