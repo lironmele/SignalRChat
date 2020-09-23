@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 using Microsoft.AspNetCore.SignalR;
 using SignalRChat.Models;
 
@@ -12,7 +10,7 @@ namespace SignalRChat.Hubs
     public class ChatHub : Hub
     {
         ChatContext context;
-        const string MainChatName = "MainChat";
+        const string MainChatName = "Main Chat";
         public ChatHub() : base()
         {
             context = new ChatContext();
@@ -25,37 +23,31 @@ namespace SignalRChat.Hubs
         {
             User Sender = context.Users.Where(u => u.UserName == user).FirstOrDefault();
 
-            Chat chat;
+            Chat chat = context.Chats.Where(c => c.ChatName == chatName).FirstOrDefault();
 
-            try
-            {
-                chat = context.Chats.Where(c => c.ChatName == chatName).First();
-            }
-            catch (System.ArgumentNullException ex)
-            {
-                chat = CreateMainChat();
-                context.Chats.Add(chat);
-            }
-
+            if (chat == null)
+                chat = CreateMainChat().Result;
+            
             Message newMessage = new Message() { User = Sender, MessageContent = message, Chat = chat };
 
             context.Messages.Add(newMessage);
-            chat.Messages.Add(newMessage);
 
             await context.SaveChangesAsync();
 
-            await Clients.All.SendAsync("RecieveMessage", chat, user, message);
+            await Clients.All.SendAsync("RecieveMessage", chatName, user, message);
         }
         public async Task RecieveChatList(string user)
         {
             foreach (Chat chat in context.Users.Where(u => u.UserName == user).FirstOrDefault().Chats)
             {
-                await Clients.Caller.SendAsync("RecieveChat", chat.ChatName, chat.GetUsernames());
+                if (chat.ChatName != MainChatName)
+                    await Clients.Caller.SendAsync("RecieveChat", chat.ChatName, chat.GetUsernames());
             }
         }
         public async Task RecieveChatHistory(string Chat)
         {
-            if (context.Chats.Where(c => c.ChatName == Chat).FirstOrDefault().Messages == null)
+            if (context.Chats.Where(c => c.ChatName == Chat).FirstOrDefault() == null ||
+                context.Chats.Where(c => c.ChatName == Chat).FirstOrDefault().Messages == null)
                 return;
             foreach (Message message in context.Chats.Where(c => c.ChatName == Chat).FirstOrDefault().Messages)
             {
@@ -74,7 +66,7 @@ namespace SignalRChat.Hubs
                 catch (System.ArgumentNullException ex)
                 {
                     _NewUser.Chats = (ICollection<Chat>) CreateMainChat();
-                }    
+                }
                 context.Users.Add(_NewUser);
                 await context.SaveChangesAsync();
 
@@ -118,12 +110,12 @@ namespace SignalRChat.Hubs
                 await Clients.Caller.SendAsync("RecieveUsername", User.UserName);
             }
         }
-        private Chat CreateMainChat()
+        private async Task<Chat> CreateMainChat()
         {
             Chat mainChat = new Chat() { ChatName = MainChatName, Users = context.Users.ToList() };
             context.Chats.Add(mainChat);
-            context.Users.ForEachAsync(u => u.Chats.Add(mainChat));
-            context.SaveChanges();
+            await context.Users.ForEachAsync(u => u.Chats.Add(mainChat));
+            await context.SaveChangesAsync();
             return mainChat;
         }
     }
