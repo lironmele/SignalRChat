@@ -18,7 +18,7 @@ namespace ChatTest
         public Main(string user)
         {
             this.user = user;
-            currentChat = "MainChat";
+            currentChat = "Main Chat";
             InitializeComponent();
             chatList = new List<ChatInfoControl>();
         }
@@ -39,25 +39,31 @@ namespace ChatTest
 
             hubConnection.On<string, List<string>>("RecieveChat", (chatName, chatUsers) =>
                 {
-                    if (chatUsers.Contains(user))
-                    {
-                        ChatInfoControl newChat = new ChatInfoControl(chatName, this);
-                        if (chatList.Count > 0)
-                        {
-                            newChat.Top = chatList[chatList.Count - 1].Bottom + 1;
-                        }
-                        else
-                        {
-                            newChat.Top = panelChats.Top + 1;
-                        }
-                        newChat.Left = Left + 3;
-                        chatList.Add(newChat);
-                        Controls.Add(newChat);
-                        newChat.BringToFront();
-                    }
+                    RecieveChat(chatName, chatUsers);
                 });
 
+            RecieveChat(currentChat, new List<string>() { user });
+            await hubConnection.SendAsync("RecieveChatHistory", currentChat);
             await hubConnection.InvokeAsync("RecieveChatList", user);
+        }
+        private void RecieveChat(string chatName, List<string> chatUsers)
+        {
+            if (chatUsers.Contains(user))
+            {
+                ChatInfoControl newChat = new ChatInfoControl(chatName, this);
+                if (chatList.Count > 0)
+                {
+                    newChat.Top = chatList[chatList.Count - 1].Bottom + 1;
+                }
+                else
+                {
+                    newChat.Top = panelChats.Top + 1;
+                }
+                newChat.Left = Left + 3;
+                chatList.Add(newChat);
+                Controls.Add(newChat);
+                newChat.BringToFront();
+            }
         }
 
         private async void Main_FormClosing(object sender, EventArgs e)
@@ -74,7 +80,7 @@ namespace ChatTest
         {
             await hubConnection.StopAsync();
         }
-
+        
         private async void btnSendMessage_Click(object sender, EventArgs e)
         {
             await hubConnection.InvokeAsync("SendMessage", currentChat, user, txtMessage.Text);
