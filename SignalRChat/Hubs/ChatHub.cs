@@ -30,11 +30,11 @@ namespace SignalRChat.Hubs
             
             Message newMessage = new Message() { User = Sender, MessageContent = message, Chat = chat };
 
+            await Clients.All.SendAsync("RecieveMessage", chatName, user, message);
+
             context.Messages.Add(newMessage);
 
             await context.SaveChangesAsync();
-
-            await Clients.All.SendAsync("RecieveMessage", chatName, user, message);
         }
         public async Task RecieveChatList(string user)
         {
