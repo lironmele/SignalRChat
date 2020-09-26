@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRChat", "SignalRChat\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatTest", "ChatTest\ChatTest.csproj", "{0FC6F777-5200-4DDA-82A5-BD867B28EBE8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteMail", "NoteMail\NoteMail.csproj", "{AA4E9490-1A95-45D0-845B-1F484E253E65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,12 @@ Global
 		{0FC6F777-5200-4DDA-82A5-BD867B28EBE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FC6F777-5200-4DDA-82A5-BD867B28EBE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FC6F777-5200-4DDA-82A5-BD867B28EBE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA4E9490-1A95-45D0-845B-1F484E253E65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA4E9490-1A95-45D0-845B-1F484E253E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA4E9490-1A95-45D0-845B-1F484E253E65}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AA4E9490-1A95-45D0-845B-1F484E253E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA4E9490-1A95-45D0-845B-1F484E253E65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA4E9490-1A95-45D0-845B-1F484E253E65}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
