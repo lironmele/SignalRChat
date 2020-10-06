@@ -1,4 +1,9 @@
 <resources>
-    <string name="app_name">NoteMail</string>
-    <string name="action_settings">Settings</string>
+  <string name="app_name">NoteMail</string>
+  <string name="action_settings">Settings</string>
+  <string name="login">LOGIN</string>
+  <string name="sign_up">SIGN UP</string>
+  <string name="logo_image">Logo image</string>
+  <string name="username">Username</string>
+  <string name="password">Password</string>
 </resources>

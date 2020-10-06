@@ -6,8 +6,8 @@ using Android.Widget;
 
 namespace NoteMail
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
-    public class LoginActivity : AppCompatActivity
+    [Activity(Label = "@string/app_name", Theme = "@android:style/Theme.Light.NoTitleBar", MainLauncher = true)]
+    public class LoginActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
